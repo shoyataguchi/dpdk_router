@@ -1,4 +1,4 @@
-dep_routetable.o = /home/taguchi/routetable/routetable.c \
+dep_routetable.o = /home/taguchi/router/routetable.c \
  /usr/include/stdc-predef.h \
  /home/taguchi/dpdk-2.0.0/x86_64-native-linuxapp-gcc/include/rte_config.h \
  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
@@ -67,4 +67,13 @@ dep_routetable.o = /home/taguchi/routetable/routetable.c \
  /usr/lib/gcc/x86_64-redhat-linux/4.8.3/include/xsaveoptintrin.h \
  /usr/lib/gcc/x86_64-redhat-linux/4.8.3/include/adxintrin.h \
  /home/taguchi/dpdk-2.0.0/x86_64-native-linuxapp-gcc/include/rte_hash.h \
- /home/taguchi/routetable/routetable.h
+ /home/taguchi/dpdk-2.0.0/x86_64-native-linuxapp-gcc/include/rte_jhash.h \
+ /home/taguchi/dpdk-2.0.0/x86_64-native-linuxapp-gcc/include/rte_random.h \
+ /home/taguchi/dpdk-2.0.0/x86_64-native-linuxapp-gcc/include/rte_malloc.h \
+ /home/taguchi/dpdk-2.0.0/x86_64-native-linuxapp-gcc/include/rte_lcore.h \
+ /home/taguchi/dpdk-2.0.0/x86_64-native-linuxapp-gcc/include/rte_per_lcore.h \
+ /usr/include/pthread.h /usr/include/sched.h /usr/include/bits/sched.h \
+ /usr/include/bits/setjmp.h \
+ /home/taguchi/dpdk-2.0.0/x86_64-native-linuxapp-gcc/include/rte_eal.h \
+ /home/taguchi/dpdk-2.0.0/x86_64-native-linuxapp-gcc/include/rte_launch.h \
+ /home/taguchi/router/routetable.h

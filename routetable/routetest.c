@@ -54,7 +54,8 @@ main(int argc, char **argv)
         rte_exit(EXIT_FAILURE, "Cannot init mbuf pool\n");
 
 
-    route_table = (struct route_table*) rte_malloc(NULL,sizeof(struct route_table),0);
+    route_table = (struct route_table*) rte_malloc(NULL,
+			sizeof(struct route_table) + sizeof(uint32_t) *MAX_RULE_SIZE ,0);
     route_table->lpm = rte_lpm_create("route_table", rte_socket_id(), MAX_RULE_SIZE, 0);
 
     if(route_table->lpm == NULL){
@@ -75,9 +76,9 @@ main(int argc, char **argv)
       .socket_id = (int) rte_socket_id()
     };
 
-    route_table->key2nexthop = rte_hash_create(&params);
+    route_table->nexthop2key = rte_hash_create(&params);
 
-    if(route_table->key2nexthop == NULL){
+    if(route_table->nexthop2key == NULL){
         printf("cannot create hash table\n");
         return 1;
     }
@@ -85,17 +86,19 @@ main(int argc, char **argv)
     add_staticroute(route_table);
 
     //lookup test
-    printf("lookup test : 10.10.1.0\n");
+    printf("lookup test : 10.10.2.1\n");
     struct in_addr addr;
     uint32_t ipaddr;
     uint8_t key = 0;
 
-    inet_aton("10.10.1.0", &addr);
+    inet_aton("10.10.2.1", &addr);
     ipaddr = ntohl(addr.s_addr);
     if(rte_lpm_lookup(route_table->lpm, ipaddr, &key) != 0)
         printf("lookup error\n");
 //    printf("nexthop : %u\n", port2ip[key][0]);
-    addr.s_addr = htonl(port2ip[key][0]);
+//    key = rte_hash_lookup(route_table->nexthop2key, &key);
+    addr.s_addr = htonl(route_table->item[key]);
+    printf("key : %d\n", key);
     printf("nexthop : %s\n", inet_ntoa(addr));
     return 0;
 }
